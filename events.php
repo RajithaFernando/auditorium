@@ -82,8 +82,8 @@ Include the above in your HEAD tag ---------->
                             <p class="desc">' .$description. '</p>
                             <ul>
 								<li style="width:44%;"><a href=" '.$web_url.' "><span class="fa fa-globe"></span>' .$web_url. '</a></li>
-                                <li style="width:25%;"><span class="fa fa-info-circle"></span> view more</li>
-                                <li style="width:25%;"><span class="fa fa-money"></span> book seats</li>
+                                <li style="width:25%;"><a href="event/index.html"><span class="fa fa-info-circle"></span> view more </a></li>
+                                <li style="width:25%;"><a href="event/index.html#registration"><span class="fa fa-money"></span> book seats </a></li>
                             </ul>
     
                             

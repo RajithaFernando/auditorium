@@ -6,7 +6,7 @@ echo
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Login, Sign up Header</title>
+	<title>NAME AUDITORIUM</title>
 
 	<link rel="stylesheet" href="assets/demo.css">
 	<link rel="stylesheet" href="assets/header-login-signup.css">
@@ -19,17 +19,20 @@ echo
 
 	<div class="header-limiter">
 
-		<h1><a href="#">Company<span>logo</span></a></h1>
+		<h1><a href="#">NAME<span>aUDITORIUM</span></a></h1>
 
 		<nav>
-			<a href="#">Home</a>
-			<a href="#" class="selected">Blog</a>
-			<a href="#">Pricing</a>
+			<a href="index.php">Home</a>
+			<a href="events.php" class="">Events</a>
+			<a href="reserve.php">Reservations</a>
+			<a href="gallery.php">Gallery</a>
+			<a href="ABOUT.php" class="">About Us</a>
+			<a href="contacts.php">Contact us</a>
 		</nav>
 
 		<ul>
-			<li><a href="#">Login</a></li>
-			<li><a href="#">Sign up</a></li>
+			<li><a href="login.php">Login</a></li>
+			<li><a href="register.php">Register</a></li>
 		</ul>
 
 	</div>
