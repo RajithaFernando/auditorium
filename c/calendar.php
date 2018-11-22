@@ -15,7 +15,8 @@
 	if (isset($_GET['years'])) {
 		$year = $_GET['years'];
 	}
-	
+	echo $month ;
+	echo $year ;
 	/***************************************/
 	// Verify on which weekday to start and end the calendar and how long the month is
 	/***************************************/
@@ -59,8 +60,7 @@
 		
 		// Fetch events
 		try {
-			$sql = 	"SELECT id, title, dayStart, dayEnd FROM reservations
-					WHERE month = $month AND year = $year";
+			$sql = 	"SELECT id, title, eventday, FROM reservations" ;
 			$result = $pdo->query($sql);
 		} catch (PDOException $e) {
 			$error = "Error fetching events: " . $e->getMessage();
@@ -72,8 +72,8 @@
 		$events[] = array(
 						"id" => $row["id"],
 						"title" => $row["title"],
-						"dayStart" => $row["dayStart"],
-						"dayEnd" => $row["dayEnd"]
+						"eventday" => $row["eventday"],
+						//"dayEnd" => $row["dayEnd"]
 					);
 		
 		}
