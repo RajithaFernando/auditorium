@@ -1,3 +1,34 @@
+<?php include('../includes/connection.php') ?>
+<?php 
+$sss = 'date';
+$events = 'SELECT * FROM events ORDER BY date' ; //Selecting all data from events table 
+$query = mysqli_query($connection, $events); //Passing SQL
+//$row = mysqli_fetch_assoc($query);
+
+while ($row = mysqli_fetch_assoc($query)){
+    //print_r($row['date']);
+    $edats[] = $row['date'];
+    //print_r($edats);
+}
+print_r($edats);
+
+
+// while($row = mysqli_fetch_assoc($query)){
+   
+//     $Eventday = $row['date'];
+// }
+
+
+// $time  = strtotime($date);
+// $day   = date('d',$time);
+// $month = date('m',$time);
+// $year  = date('Y',$time);
+
+    
+
+?>
+
+
 <?php
 date_default_timezone_set("	Asia/Colombo");
 
@@ -16,7 +47,7 @@ if ($timestamp === false){
 }
 
 //today
-$today = date('y-n-d',time());
+$today = date('Y-m-j', time());
 
 //for H3 Title
 $html_title = date('y / m', $timestamp);
@@ -41,17 +72,50 @@ $week = '';
 
 // add empty cell
 $week .= str_repeat('<td></td>', $str);
-
+//echo $today ;
 for ( $day = 1; $day <= $day_count; $day++, $str++){
     $date = $ym.'-'.$day;
-    if ($today ==$daye){
-        $week .= '<td class ="today">'.$day;
-    }
-    else{
-        $week .= '<td>'.$day;
-    }
-    $week .= '</td>';
 
+    // if ($today == $date) {
+    //     $week .= '<td class="today">' . $day;
+
+    // }
+
+    // else{
+    //     $week .= '<td>'.$day;
+    // }
+
+
+
+    foreach($edats as $Eventdate){
+       // $Eventdate = $row['date'];
+
+        // $time  = strtotime($Eventdate);
+        // $Eventday   = date('d',$time);
+        // $Eventmonth = date('m',$time);
+        // $Eventyear  = date('Y',$time);
+
+        
+        if ($Eventday == $date){
+            $week .= '<td class="Eventday">' . $day;
+            //array_splice($row['date'],0);
+            //echo $row['date'];
+            //break;
+            
+        }   
+        
+        
+    }
+    if ($today == $date) {
+       $week .= '<td class="today">' . $day; 
+       echo $date;   
+        }
+     else{
+        $week .= '<td>'.$day;
+        
+    }
+
+   
     // End of the week OR end of the month
     if ($str %7 == 6 || $dat == $day_count){
         if ($day == $day_count){
@@ -70,11 +134,6 @@ for ( $day = 1; $day <= $day_count; $day++, $str++){
 
     
 }
-
-
-
-
-
 
 ?>
 
@@ -104,7 +163,9 @@ for ( $day = 1; $day <= $day_count; $day++, $str++){
 
         }
         .today {
+            font-size: 20px;
             background:orange;
+            
         }
         th:nth-of-type(7),td:nth-of-type(7){
             color:blue;
@@ -113,6 +174,10 @@ for ( $day = 1; $day <= $day_count; $day++, $str++){
         th:nth-of-type(1),td:nth-of-type(1){
             color:red;
             
+        }
+        .Eventday {
+            background:purple;
+            z-index: -1;
         }
     
     

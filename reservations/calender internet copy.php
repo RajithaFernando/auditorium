@@ -1,25 +1,3 @@
-<?php include('../includes/connection.php') ?>
-<?php 
-$events = 'SELECT * FROM events ORDER BY date' ; //Selecting all data from events table 
-$query = mysqli_query($connection, $events); //Passing SQL
-//$row = mysqli_fetch_assoc($query);
-
-while ($row = mysqli_fetch_assoc($query)){
-    //print_r($row['date']);
-    $edats[] = $row['date'];
-    $ename[] = $row['name'];
-    //print_r($edats);
-}
-$l = count($edats);
-//echo $edats;
-// foreach($edats as $Eventdate){
-//     $Eventdate = $row['date'];
-//        echo $Eventdate;
-// }
-
-
-?>
-
 <?php
 // Set your timezone
 date_default_timezone_set('Asia/Colombo');
@@ -61,49 +39,11 @@ for ( $day = 1; $day <= $day_count; $day++, $str++) {
      
     $date = $ym . '-' . $day;
      
-
-    for ($i=0; $i<$l; $i ++ ){
-        if($date == $edats[$i]){
-            // echo $edats[$i] . '  ';
-            // echo $today. '<br>';
-            $week .= '<td class="Eventday"><a href="https://www.w3schools.com">' . $day .'<br><font color:black>'.$ename[$i]. '</font></a>';
-            $day ++;
-            $str ++;
-           
-            
-        }
-        // elseif ($today == $date) {
-        //     $week .= '<td class="today">' . $day;
-        //     break;
-        // else{
-        //     $week .= '<td>' . $day;
-        //     break;
-            
-        // }
-    
-    }
-
-    // foreach($edats as $Eventdate){
-    //     // $Eventdate = $row['date'];
-
-    //     if ($Eventday == $date){
-    //         echo $Eventdate;
-    //         $week .= '<td class="Eventday">' . $day;
-    //         //array_splice($row['date'],0);
-    //         //echo $row['date'];
-    //         //break;
-            
-    //     }   
-         
-         
-    // }
-
     if ($today == $date) {
         $week .= '<td class="today">' . $day;
     } else {
         $week .= '<td>' . $day;
     }
-    //$week .= '<td>' . $day;
     $week .= '</td>';
      
     // End of the week OR End of the month
@@ -117,15 +57,6 @@ for ( $day = 1; $day <= $day_count; $day++, $str++) {
         $week = '';
     }
 }
-// $l = count($edats);
-// for ($i=0; $i<$l; $i ++ ){
-//     if($today != $edats[$i]){
-//         echo $edats[$i] . '  ';
-//         echo $today. '<br>';
-//     }
-
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -143,21 +74,14 @@ for ( $day = 1; $day <= $day_count; $day++, $str++) {
             margin-bottom: 30px;
         }
         th {
-            height: 30px 
+            height: 30px;
             text-align: center;
         }
         td {
-            height: 100px !important;
-            width :100px !important;
-            font-size:20px;
+            height: 100px;
         }
         .today {
             background: orange;
-        }
-
-        .Eventday {
-            background:#551262 ;
-            
         }
         th:nth-of-type(1), td:nth-of-type(1) {
             color: red;
@@ -165,22 +89,6 @@ for ( $day = 1; $day <= $day_count; $day++, $str++) {
         th:nth-of-type(7), td:nth-of-type(7) {
             color: blue;
         }
-        a:visited {
-            color: #D7E7EC  ;
-        }
-
-        a:link{
-            color:#D7E7EC  ; 
-        }
-        a:hover{
-            color:black;
-            text-decoration: none !important;
-
-        }
-
-
-        }
-        
     </style>
 </head>
 <body>
