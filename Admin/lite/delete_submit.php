@@ -1,8 +1,8 @@
 <?php
 
-include('connection.php');
-include('session.php');
-include('message.php');
+include('../../includes/connection.php');
+include('../../includes/session.php');
+include('../../includes/message.php');
 ?>
 
 

@@ -1,0 +1,223 @@
+.wrapper{
+	margin: 0 auto;
+	width: 1000px;
+}
+.clearfix{overflow: auto;}
+p {margin-top: 10px; margin-bottom: 15px; font-size: 16px; color: #444}
+a {text-decoration: none; color: red;}
+header .logo {
+	float:left;
+	margin-top: 30px;
+	margin-left: 50px;
+	margin-right: 20px;
+}
+header .logo h1 {
+	font-size: 48px;
+	font-weight: normal;
+	letter-spacing: -1px;
+	font-variant: small-caps;
+}
+
+header .socialmedia ul {
+	float:right; 
+	margin-top:30px;
+} 
+header .socialmedia ul {
+	list-style:none
+}
+header .socialmedia ul li {
+ display: inline
+}
+
+header .socialmedia ul li a{
+	margin-left: 5px
+	padding: 6px;
+	background: #444;
+	color: #fff;
+	display: inline-block;
+	border-radius: 20px;
+
+}
+
+header .socialmedia ul li a:hover {
+	background: orange;
+
+}
+
+nav {
+	text-align: center;
+	border-radius: 5px;
+}
+
+nav ul li a {
+	margin: 10px 40px 10px 40px;
+	
+	display: inline-block;
+
+}
+
+nav ul li a:hover {
+	color: red;
+}
+
+link:hover{
+	color:red;
+}
+div .intro{
+	width: 970px;
+	margin: 15px;
+	margin-bottom: 0px;
+	
+}
+
+div .intro div .introimage{
+	width: 400px;
+	
+
+
+}
+ .introtext{
+	width:570;
+	margin-top: 50px;
+	
+
+
+}
+div .introtext h1 {
+	font-variant: small-caps; 
+	font-weight: normal;
+	font-size: 72px;
+	text-transform: uppercase;
+ 
+}
+
+div .intoimage img{
+	float: left;
+}
+div .introtext p{
+	font-size: 18px;
+}
+
+div .introtext a {
+	text-transform: uppercase;
+	float: right;
+}
+
+ 
+div .homecontent{
+	width: 1000px;
+	background: #eee;
+
+
+}
+
+div .home {
+	width: 313.33px;
+	margin: 5px;
+	float: left;
+}
+ div .home h2{
+ 	margin: 30px 0 30px 0;
+ 	font-size: 30px;
+ 	font-weight: normal;
+ }
+ div .home img{
+ 	width: 313.33px;
+ }
+
+ div .home a{
+ 	float: right;
+ }
+ div .Services img{
+	width: 64px;
+	float: left;
+	margin-right: 15px;
+	margin-bottom: 20px;
+}
+div .Services{
+	margin-bottom: 20px;
+}
+div .Services p{
+	margin-top: 0px;
+
+}
+iv .quote{
+	float: left;
+}
+
+div .quote i{
+	float: left;
+}
+
+div .quote h3{
+	margin-top: 25px;
+	margin-left: 15px;
+	font-size: 18px;
+	float: left;
+
+}	
+
+div .quote p{
+	clear: both;
+}
+
+footer {
+	width: 1000px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	float: left;
+}
+
+.footercol{
+	width: 231.25px;
+	float: left;
+	margin-left: 15px;
+	border-top:1px solid #000;
+}
+
+div .footercol h4 {
+	text-transform: uppercase;
+	margin-top: 15px;
+	color: #444;
+
+}
+
+div .tweet p{
+	font-size: 14px;
+    
+}
+
+div .quicklinks{
+	margin-top: 10px;
+	list-style: none;
+
+}
+
+ul.quicklinks li a{
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	display: block;
+	border-bottom: 1px solid #aaa;
+	color: #666;
+}
+ul.quicklinks li a::before{
+	content:" »"
+}
+ul.quicklinks li a:hover {
+	color: red;
+
+}
+div .blog{
+	clear: both;
+}
+
+div .blog{
+	font-size: 20px;
+}
+div .blog{
+	font-size: 14px;
+}
+div .blog a.readmore {
+	float: right;
+}
+

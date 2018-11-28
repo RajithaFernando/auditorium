@@ -10,7 +10,7 @@ if (isset($_SESSION['id'])){
         session_unset($_SESSION['usertype']);
         session_unset($_SESSION['id']);
 		$message = base64_encode(urlencode(("Logged Out Successfully")));
-		header('Location:../../login.php?msg=' . $message);
+		header('Location:login.php?msg=' . $message);
 		exit();
 	}
 

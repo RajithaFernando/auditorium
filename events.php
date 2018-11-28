@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
+    
     <link rel="stylesheet" href="css/custome.css">
     
 <!------ 
@@ -22,7 +23,7 @@ Include the above in your HEAD tag ---------->
     <?php include('includes/hedder.php') ?>
     <?php
     
-    $events = 'SELECT * FROM events ORDER BY date' ; //Selecting all data from events table 
+    $events = 'SELECT * FROM events ORDER BY date DESC' ; //Selecting all data from events table 
     $query = mysqli_query($connection, $events); //Passing SQL
     
    
@@ -66,15 +67,20 @@ Include the above in your HEAD tag ---------->
         $month = date('m',$time);
         $year  = date('Y',$time);
 
-        $monthNum = sprintf("%02s", $result["month"]);
-        $monthName = date("F", strtotime($monthNum));
+        //$monthNum = sprintf("%02s", $result["month"]);
+        //$monthName = date("F", strtotime($monthNum));
+
+        //$monthNum  = 3;
+        $monthName = date('M', mktime(0, 0, 0, $month, 10)); // March
+        // F = MARCH , M = Mar
+        // print_r($monthName);
+        
 
                         echo '
 						<time datetime=".">
 							<span class="day"> '. $day. '</span>
-							<span class="month">' .$monthName.'</span>
-							<span class="year">' . $year. '</span>
-							<span class="time">ALL DAY</span>
+							<span class="month">' .$monthName.'-'.$year.'</span>
+							
 						</time>
 						<img alt=" '.$name.' " src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
 						<div class="info">

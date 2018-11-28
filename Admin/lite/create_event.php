@@ -1,4 +1,4 @@
-<?php include('session.php') ?>
+<?php include('../../includes/session.php') ?>
 
 
 
@@ -200,52 +200,52 @@
                                 <div class="alert alert-warning">
                                   <p><?php include_once('message.php'); ?></p>.
                                 </div>
-                                <form action="create_event_submit.php" method="post">
+                                <form action="create_event_submit.php" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                       <label for="example-text-input" class="col-2 col-form-label">Event Name</label>
-                                      <div class="col-10">
+                                      <div class="col-7">
                                         <input class="form-control" type="text" id="example-text-input" name="name">
                                       </div>
                                     </div>
                                 
                                 
                                     <div class="form-group row">
-                                      <label for="example-date-input" class="col-2 col-form-label">Date</label>
-                                      <div class="col-10">
-                                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input" name="date">
-                                      </div>
+                                        <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                                        <div class="col-3">
+                                            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" name="date">
+                                        </div>
+
+                                        <label for="example-time-input" class="col-1 col-form-label">Time</label>
+                                        <div class="col-3">
+                                            <input class="form-control" type="time" value="13:45:00" id="example-time-input" name="time">
+                                        </div>
                                     </div>
                                 
-                                    <div class="form-group row">
-                                      <label for="example-time-input" class="col-2 col-form-label">Time</label>
-                                      <div class="col-10">
-                                        <input class="form-control" type="time" value="13:45:00" id="example-time-input" name="time">
-                                      </div>
-                                    </div>
+                                    
                                 
                                     <div class="form-group row">
-                                      <label for="example-url-input" class="col-2 col-form-label">Website</label>
-                                      <div class="col-10">
-                                        <input class="form-control" type="url" placeholder="https://website.com" id="example-url-input" name="web_url">
-                                      </div>
+                                        <label for="example-url-input" class="col-2 col-form-label">Website</label>
+                                        <div class="col-10">
+                                            <input class="form-control" type="url" placeholder="https://website.com" id="example-url-input" name="web_url">
+                                        </div>
                                     </div>
                                     <div class="form-group row">
-                                      <label for="example-url-input" class="col-2 col-form-label">Facebook URL</label>
-                                      <div class="col-10">
-                                        <input class="form-control" type="url" placeholder="https:/facebook.com" id="example-url-input" name="fb_url">
-                                      </div>
+                                        <label for="example-url-input" class="col-2 col-form-label">Facebook URL</label>
+                                        <div class="col-10">
+                                            <input class="form-control" type="url" placeholder="https:/facebook.com" id="example-url-input" name="fb_url">
+                                        </div>
                                     </div>
                                     <div class="form-group row">
-                                      <label for="example-url-input" class="col-2 col-form-label">Twitter URL</label>
-                                      <div class="col-10">
-                                        <input class="form-control" type="url" placeholder="https://twitter.com" id="example-url-input" name="twitter_url">
-                                      </div>
+                                        <label for="example-url-input" class="col-2 col-form-label">Twitter URL</label>
+                                        <div class="col-10">
+                                            <input class="form-control" type="url" placeholder="https://twitter.com" id="example-url-input" name="twitter_url">
+                                        </div>
                                     </div>
                                 <div class="form-group row">
-                                      <label for="example-url-input" class="col-2 col-form-label">Google + URL </label>
-                                      <div class="col-10">
-                                        <input class="form-control" type="url" placeholder="https://googleplus.com" id="example-url-input" name="google_url">
-                                      </div>
+                                        <label for="example-url-input" class="col-2 col-form-label">Google + URL </label>
+                                        <div class="col-10">
+                                            <input class="form-control" type="url" placeholder="https://googleplus.com" id="example-url-input" name="google_url">
+                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         
@@ -254,38 +254,39 @@
                                           <textarea class="form-control" rows="5" id="example-text-input" name="description" placeholder="DIscrive Your Event"></textarea>
                                         </div>
                                     </div>
-                                <div class="form-group row">
-                                      <label for="example-text-input" class="col-3 col-form-label">Ticket price (VIP)</label>
-                                      <div class="col-6">
-                                        <input class="form-control" type="number" id="example-text-input" name="ticket1">
-                                      </div>
-                                         <div class="col3"></div>
+                                    <div class="form-group row">
+                                        <label for="example-text-input" class="col-3 col-form-label">Ticket price (VIP)</label>
+                                        <div class="col-6">
+                                            <input class="form-control" type="number" id="example-text-input" name="ticket1">
+                                        </div>
+                                            <div class="col3"></div>
 
                                     </div>
                                 
                                     <div class="form-group row">
-                                      <label for="example-text-input" class="col-3 col-form-label">Ticket price First class</label>
-                                      <div class="col-6">
-                                        <input class="form-control" type="number" id="example-text-input" name="ticket2">
-                                      </div>
-                                        <div class="col3"></div>
+                                        <label for="example-text-input" class="col-3 col-form-label">Ticket price First class</label>
+                                        <div class="col-6">
+                                            <input class="form-control" type="number" id="example-text-input" name="ticket2">
+                                        </div>
+                                            <div class="col3"></div>
 
                                     </div>
                                 
                                      <div class="form-group row">
-                                      <label for="example-text-input" class="col-3 col-form-label">Ticket price Second class</label>
-                                      <div class="col-6">
-                                        <input class="form-control" type="number" id="example-text-input" name="ticket3">
-                                      </div>
-                                         <div class="col3"></div>
+                                        <label for="example-text-input" class="col-3 col-form-label">Ticket price Second class</label>
+                                        <div class="col-6">
+                                            <input class="form-control" type="number" id="example-text-input" name="ticket3">
+                                        </div>
+                                            <div class="col3"></div>
                                     </div>
             
                                     <div class="form-group row">
-                                      <label for="example-email-input" class="col-2 col-form-label">Uplode an Image</label>
-                                      <div class="col-10">
+                                        <label class="col-2 col-form-label">Uplode an Image</label>
+                                        <div class="col-10">
+                                            
                                         <input type="file" name="fileToUpload" id="fileToUpload">
-                                        <input type="submit" value="Upload Image" name="submit">
-                                      </div>
+                                        
+                                    </div>
                                         
                                         <div class="col-12"><hr></div>
                                         <div class="col-4"></div>
@@ -299,13 +300,10 @@
                                             
                                         </div>
                                         </div>
-                                            
-                                           
-                                            
-                                            
+                                                <!--
                                             <input type="hidden" value="<? php  
-                                            echo $id;  ?>" name="manager_id">
-                                        
+                                            //echo $id;  ?>" name="manager_id">
+                                        -->
                                        </form> 
                                   
                                         
@@ -337,7 +335,7 @@
                     
                     <footer class="footer"> Footerrerere  <? php  
                       
-                        echo $id;
+                       
                     ?>
                 
                                             

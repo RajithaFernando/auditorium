@@ -8,7 +8,7 @@
     overflow-x:hidden;
      
     
-     // Changed
+  
     }
 .hedder{
     
@@ -57,7 +57,7 @@
 }
 .event-list > li > time > .month {
     display: block;
-    font-size: 18pt;
+    font-size: 16pt;
     font-weight: 500;
     line-height: 1;
 }

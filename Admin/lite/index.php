@@ -1,10 +1,10 @@
-<?php include('connection.php') ?>
-<?php include('session.php') ?>
+<?php include('../../includes/connection.php') ?>
+<?php include('../../includes/session.php') ?>
 <?php checkSession(); 
 
 if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
        $message = base64_encode(urlencode("Please Login"));
-       header('Location:login.php?msg=' . $message);
+       header('Location:../../login.php?msg=' . $message);
        exit();
        }
 
@@ -155,7 +155,7 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
             <div class="sidebar-footer">
                 <!-- item--><a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
                 <!-- item--><a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <!-- item--><a href="logout.php" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+                <!-- item--><a href="../../includes/logout.php" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
             <!-- End Bottom points-->
         </aside>
         <!-- ============================================================== -->

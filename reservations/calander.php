@@ -99,7 +99,7 @@ for ( $day = 1; $day <= $day_count; $day++, $str++) {
     // }
 
     if ($today == $date) {
-        $week .= '<td class="today">' . $day;
+        $week .= '<td class="today otherday">' . $day;
     } else {
         $week .= '<td>' . $day;
     }
