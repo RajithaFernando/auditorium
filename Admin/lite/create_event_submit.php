@@ -13,12 +13,36 @@ include('message.php');
 
 
 
-  <?php checkSession();
-                       
-     $id = $_SESSION["id"]; 
-     echo $id;
+<?php 
+// checkSession();
+                      
+// if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
+//         $message = base64_encode(urlencode("Please Login"));
+//         header('Location:../../login.php?msg=' . $message);
+//         exit();
+// }
+
+// $id = $_SESSION["id"]; 
+
     
-	
+        
+// making RefNO Using date and time
+date_default_timezone_set('Asia/Colombo');
+
+$day   = date('d');
+$month = date('m');
+$year  = date('y');
+$hour = date('H');
+$min = date('i');
+$sec = date('s');
+
+$refCode = $year.$month.$day.$hour.$min.$sec;
+settype($refCode, "integer");
+
+// echo $refCode;
+
+
+
 
 //image upload
         $target_dir = "EventImages/";
@@ -31,8 +55,8 @@ include('message.php');
         if($check !== false) {
                 //echo "File is an image - " . $check["mime"] . ".";
 
-                $message .= base64_encode(urlencode("File is a Image"));
-                header('Location:create_event.php?msg=' . $message);
+                // $message .= base64_encode(urlencode("File is a Image "));
+                // header('Location:create_event.php?msg=' . $message);
                 $uploadOk = 1;
         } else {
                 // echo "File is not an image.";
@@ -76,8 +100,8 @@ include('message.php');
         } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 // echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-                $message .= base64_encode(urlencode("File was Uploaded"));
-                header('Location:create_event.php?msg=' . $message);
+                        // $message .= base64_encode(urlencode("File was Uploaded "));
+                        // header('Location:create_event.php?msg=' . $message);
         } else {
                 // echo "Sorry, there was an error uploading your file.";
                 $message .= base64_encode(urlencode("Sorry, there was an error uploading your file. "));
@@ -88,7 +112,7 @@ include('message.php');
 
 
 $name = $_POST['name'];
-$manager_id = $id;
+$manager_id = $_POST['manager_id'];
 $date = $_POST['date'];
 $time  = $_POST['time'];
 $web_url  = $_POST['web_url'];
@@ -99,16 +123,31 @@ $description  = $_POST['description'];
 $ticket1 = $_POST['ticket1'];
 $ticket2 = $_POST['ticket2'];
 $ticket3 = $_POST['ticket3'];
-$some ='sss';
+$imageName = $_FILES["fileToUpload"]["name"];
     
+
+
+// echo $name;
+// echo $manager_id;
+// echo $imageName;
+
+
+
     
 
-//$sss = "INSERT INTO `events` (`id`, `name`, `manager_id`, `date`, `time`, `web_url`, `fb_url`, `twitter_url`, `google_url`, `description`, `image`, `ticket1`, `ticket2`, `ticket3`) VALUES (NULL, 'a', '22', '2018-09-05', '05:00:00', '1', '1', '1', '11', '1', '1', '1', '1', '1')";
+//$sss = "INSERT INTO `tempEvents` (`id`, `name`, `manager_id`, `date`, `time`, `web_url`, `fb_url`, `twitter_url`, `google_url`, `description`, `image`, `ticket1`, `ticket2`, `ticket3`) VALUES (NULL, 'a', '22', '2018-09-05', '05:00:00', '1', '1', '1', '11', '1', '1', '1', '1', '1')";
 
-
-$event = "INSERT INTO events (name , manager_id , date , time , web_url , fb_url , twitter_url , google_url , description  , ticket1 , ticket2 , ticket3 ) VALUES ('$name' , '11' , '$date' , '$time' , '$web_url' , '$fb_url' , '$twitter_url' , '$google_url' , '$description'  , '$ticket1' , '$ticket2' , '$ticket3')";
+// not working working
+// $event = "INSERT INTO tempEvents (RefNo , name , manager_id , date , time , web_url , fb_url , twitter_url , google_url , description  , image , ticket1 , ticket2 , ticket3 )VALUES ('$refCode','$name' , $manager_id , '$date' , '$time' , '$web_url' , '$fb_url' , '$twitter_url' , '$google_url' , '$description'  , $imageName , '$ticket1' , '$ticket2' , '$ticket3')";
  
-//mysqli_query($connection,$event); 
+// $event = "INSERT INTO tempEvents ('RefNo' , 'name' , 'manager_id' , 'date' , 'time' , 'web_url' , 'fb_url' , 'twitter_url' , 'google_url' , 'description'  , 'image' , 'ticket1' , 'ticket2' , 'ticket3' ) VALUES ('$refCode','$name' , '$manager_id' , '$date' , '$time' , '$web_url' , '$fb_url' , '$twitter_url' , '$google_url' , '$description'  , '$imageName' , '$ticket1' , '$ticket2' , '$ticket3')";
+ 
+
+$event = "INSERT INTO `tempEvents` (`refNo`, `name`, `manager_id`, `date`, `time`, `web_url`, `fb_url`, `twitter_url`, `google_url`, `description`, `image`, `ticket1`, `ticket2`, `ticket3`) 
+VALUES ('$refCode', '$name', '$manager_id', '$date', '$time', '$web_url', '$fb_url', '$twitter_url', '$google_url', '$description', '$imageName', '$ticket1', '$ticket2', '$ticket3');";
+ 
+
+// mysqli_query($connection,$event); 
 if (mysqli_query($connection,$event) === TRUE) {
             $message .= base64_encode(urlencode("Event Created Succesfully"));
             header('Location:create_event.php?msg=' . $message);
@@ -119,6 +158,8 @@ else {
         header('Location:create_event.php?msg=' . $message);
         exit();
         }
+
+
 /*
 '$name' , '$manager_id' , '$date' , '$time' , '$web_url' , '$fb_url' , '$twitter_url' , '$google_url' , '$description' , '$image'
  , '$ticket1' , '$ticket2' , '$ticket3'

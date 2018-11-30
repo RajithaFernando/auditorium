@@ -2,10 +2,18 @@
 
 
 
-  <?php checkSession();
+  <?php 
+  checkSession();
+
+  if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
+    $message = base64_encode(urlencode("Please Login"));
+    header('Location:../../login.php?msg=' . $message);
+    exit();
+}
+
                        
-     $id = $_SESSION["id"]; 
-    ?>
+    $id = $_SESSION["id"]; 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -300,10 +308,9 @@
                                             
                                         </div>
                                         </div>
-                                                <!--
-                                            <input type="hidden" value="<? php  
-                                            //echo $id;  ?>" name="manager_id">
-                                        -->
+                                            
+                                            <input type="hidden" name="manager_id" value= "<?php echo $id; ?>" >
+                                        
                                        </form> 
                                   
                                         
@@ -333,10 +340,7 @@
             <!-- ============================================================== -->
             
                     
-                    <footer class="footer"> Footerrerere  <? php  
-                      
-                       
-                    ?>
+                    <footer class="footer"> Footerrerere  <?php echo $id   ;?>
                 
                                             
             </footer>';
