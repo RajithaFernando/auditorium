@@ -87,7 +87,7 @@
     </tr>
   </thead>
    <?php
-    $sql="SELECT * FROM events WHERE status='not confirmed'";
+    $sql="SELECT * FROM `tempEvents` WHERE status='not confirmed'";
     
     $result=mysqli_query($connection,$sql);
     while($row=mysqli_fetch_array($result)){
@@ -95,12 +95,12 @@
   <tbody>
     <tr>
       <th ><?php echo $row['name']; ?></th>
-      <td><?php echo $row['id']; ?></td>
+      <td><?php echo $row['refNo']; ?></td>
       <td><?php echo $row['date']?></td>
       
       <td><form action="eventconfirmation.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-        <input type="submit" name="" value="confirm" class="btn btn-outline-primary">
+        <input type="hidden" name="refNo" value="<?php echo $row['refNo']; ?>">
+        <input type="submit" name="confirm" value="confirm" class="btn btn-outline-primary">
       </form></td>
     </tr>
    <?php

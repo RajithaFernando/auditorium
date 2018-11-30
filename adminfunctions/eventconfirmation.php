@@ -1,10 +1,10 @@
 <?php include('../includes/connection.php') ;
- $id=$_POST['id'];
-echo $id;
+ $refNo=$_POST['refNo'];
+echo $refNo;
 
-$sql="UPDATE events
+$sql="UPDATE tempEvents
 SET status= 'confirmed' 
-WHERE id=$id";
+WHERE refNo ='$refNo'";
 
 $query=mysqli_query($connection,$sql);
 

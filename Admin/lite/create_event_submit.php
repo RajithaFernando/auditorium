@@ -143,8 +143,8 @@ $imageName = $_FILES["fileToUpload"]["name"];
 // $event = "INSERT INTO tempEvents ('RefNo' , 'name' , 'manager_id' , 'date' , 'time' , 'web_url' , 'fb_url' , 'twitter_url' , 'google_url' , 'description'  , 'image' , 'ticket1' , 'ticket2' , 'ticket3' ) VALUES ('$refCode','$name' , '$manager_id' , '$date' , '$time' , '$web_url' , '$fb_url' , '$twitter_url' , '$google_url' , '$description'  , '$imageName' , '$ticket1' , '$ticket2' , '$ticket3')";
  
 
-$event = "INSERT INTO `tempEvents` (`refNo`, `name`, `manager_id`, `date`, `time`, `web_url`, `fb_url`, `twitter_url`, `google_url`, `description`, `image`, `ticket1`, `ticket2`, `ticket3`) 
-VALUES ('$refCode', '$name', '$manager_id', '$date', '$time', '$web_url', '$fb_url', '$twitter_url', '$google_url', '$description', '$imageName', '$ticket1', '$ticket2', '$ticket3');";
+$event = "INSERT INTO `tempEvents` (`refNo`, `name`, `manager_id`, `date`, `time`, `web_url`, `fb_url`, `twitter_url`, `google_url`, `description`, `image`, `ticket1`, `ticket2`, `ticket3`, `status`) 
+VALUES ('$refCode', '$name', '$manager_id', '$date', '$time', '$web_url', '$fb_url', '$twitter_url', '$google_url', '$description', '$imageName', '$ticket1', '$ticket2', '$ticket3' , 'not confirmed');";
  
 
 // mysqli_query($connection,$event); 
