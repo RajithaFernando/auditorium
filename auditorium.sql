@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 30, 2018 at 10:27 AM
+-- Generation Time: Jan 02, 2019 at 03:25 PM
 -- Server version: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -80,6 +80,31 @@ INSERT INTO `reservations` (`id`, `title`, `dayStart`, `eventday`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sales`
+--
+
+CREATE TABLE `sales` (
+  `userID` int(10) NOT NULL,
+  `eventRef` text NOT NULL,
+  `seatID` int(10) NOT NULL,
+  `ticketValue` int(10) NOT NULL,
+  `Catagory` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`userID`, `eventRef`, `seatID`, `ticketValue`, `Catagory`) VALUES
+(1, '181231134745', 1, 1000, 0),
+(1, '181231134745', 2, 3000, 1),
+(2, '181231134745', 5, 2000, 2),
+(6, '181231134745', 9, 1000, 3),
+(8, '181231134745', 21, 3000, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tempEvents`
 --
 
@@ -123,7 +148,10 @@ INSERT INTO `tempEvents` (`refNo`, `name`, `manager_id`, `date`, `time`, `web_ur
 ('181130093912', 'ABC', 2, '2011-08-19', '13:45:00', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'wsadawd', 'hasi.jpg', 7, 8, 5, ''),
 ('181130094208', 'final', 2, '2011-08-19', '13:45:00', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'https://www.youtube.com/watch?v=nfWlot6h_JM', 'wsadawd', 'sarama.jpg', 7, 8, 9, ''),
 ('181130101013', 'STATUS', 2, '2016-08-19', '13:45:00', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'sadasd', 'students-walking_2638975b.jpg', 111, 2131, 123123, 'confirmed'),
-('181130101057', 'Status', 2, '2013-09-19', '15:45:00', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'asdasda', 'srilanka_8.jpg', 10, 5, 5, 'not confirmed');
+('181130101057', 'Status', 2, '2013-09-19', '15:45:00', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'https://www.youtube.com/watch?v=TcJ-wNmazHQ', 'asdasda', 'srilanka_8.jpg', 10, 5, 5, 'not confirmed'),
+('181231134745', 'ABC', 2, '2019-01-01', '13:46:00', 'http://localhost/auditorium/adminfunctions/admin.php', 'http://localhost/auditorium/adminfunctions/admin.php', 'http://localhost/auditorium/adminfunctions/admin.php', 'http://localhost/auditorium/adminfunctions/admin.php', 'aaadasda', 'PEO-hear_no_evil_monkey.svg_-1030x1030.png', 1000, 122, 212, 'confirmed'),
+('181231163048', 'TEst 3', 2, '2019-01-22', '15:45:00', 'https://www.facebook.com/', 'https://www.facebook.com/', 'https://www.facebook.com/', 'https://www.facebook.com/', 'ADASLAKSLKAKLSMA', 'Rajeeva-Bandaranaike.jpg', 1000, 1111, 2132, 'confirmed'),
+('190101100922', 'AAA', 2, '2019-01-02', '13:45:00', 'http://localhost/auditorium/Admin/lite/create_event.php', 'http://localhost/auditorium/Admin/lite/create_event.php', 'http://localhost/auditorium/Admin/lite/create_event.php', 'http://localhost/auditorium/Admin/lite/create_event.php', 'AAAAAA', 'brainandheart.jpg', 1111, 1111, 1111, 'confirmed');
 
 -- --------------------------------------------------------
 
