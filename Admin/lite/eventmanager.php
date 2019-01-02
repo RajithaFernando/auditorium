@@ -61,12 +61,10 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
 <!-- end of chart styles -->
 
 <style>
-#chartContainer div canvas{
-    position:relative !important;
-}
-.canvasjs-chart-credit{
-    display:none;
-}
+.mylable {
+    font-size : 20px !important;
+    margin: 30px;
+} 
 </style>
 
 
@@ -155,7 +153,7 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                     <ul id="sidebarnav">
                         <li> <a class="waves-effect waves-dark" href="eventmanager.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="pages-profile.php" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">My Profile</span></a>
+                        <li> <a class="waves-effect waves-dark" href="profile.php" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">My Profile</span></a>
                         </li>
                         <li> <a class="waves-effect waves-dark" href="create_event.php" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Create Event</span></a>
                         </li>
@@ -198,7 +196,7 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                     <div class="col-md-4 col-4 align-self-center">
                         <h3 class="text-themecolor">Dashboard</h3>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Event Manager</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
@@ -206,27 +204,30 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                     <div class="dropdown col-md-4 col-4 align-self-center">
                     
                         <form action="chart.php" method="post">
-                        <label for="custID" class="col-sm-2 col-form-label">Select Event</label>
-                        <select class="form-control" id="sel2" name="refNo">
-                            <?php 
-                            // 
-                                 while ($row1 = mysqli_fetch_assoc($result1))   {
-                                    echo '<option value ='.$row1['refNo'].' id="custId">'.$row1['name'].'</option>';
-                                } 
-                            ?>           
-                        </select>
-                            <!-- <input type="" id="custId" name="refNo" value="181231134745"> -->
-                           <a href="charts.php"> <button type="submit" class="btn btn-primary">Get Event Reports</button></a>
+                            <label for="custID" class="col-form-label mylable" ><kbd>Select Event</kbd></label>
+                            <select class="form-control" id="sel2" name="refNo">
+                                <?php 
+                                // <input type="hidden" name="name" value='.$row1['name'].'>'
+                                     while ($row1 = mysqli_fetch_assoc($result1))   {
+                                        echo '<option value ='.$row1['refNo'].' id="custId">'.$row1['name'].'</option>'
+                                             ;
+                                    } 
+                                ?>           
+                            </select>
+                                <!-- <input type="" id="custId" name="refNo" value="181231134745"> -->
+                               <a href="charts.php"> <button type="submit" class="btn btn-primary mylable">Get Event Reports</button></a>
                         </form>
                             
                             </div>
-                        </div>
+                        
                     
                     
                  
-               <div class="col-md-4 col-4 align-self-center">
-                        <a href="create_event.php" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Create Event</a>
+                    <div class="col-md-4 col-4 align-self-center">
+                        <a href="create_event.php" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down mylable"> Create Event</a>
                     </div>
+
+                </div>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
@@ -303,47 +304,7 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 
-<script>
-   window.onload = function () {
-    //Better to construct options first and then pass it as a parameter
-    var options = {
-        animationEnabled: true,
-        title: {
-            text: "Ticket Sales of Event A",                
-            fontColor: "Peru"
-        },	
-        axisY: {
-            tickThickness: 0,
-            lineThickness: 0,
-            valueFormatString: " ",
-            gridThickness: 0                    
-        },
-        axisX: {
-            tickThickness: 0,
-            lineThickness: 0,
-            labelFontSize: 18,
-            labelFontColor: "Peru"				
-        },
-        data: [{
-            indexLabelFontSize: 12,
-            toolTipContent: "<span style=\"color:#62C9C3\">{indexLabel}:</span> <span style=\"color:#CD853F\"><strong>{y}</strong></span>",
-            indexLabelPlacement: "inside",
-            indexLabelFontColor: "white",
-            indexLabelFontWeight: 600,
-            indexLabelFontFamily: "Verdana",
-            color: "#62C9C3",
-            type: "bar",
-            dataPoints: [
-                { y: <?php echo $ticket1; ?>, label: "<?php echo $ticket1p; ?>", indexLabel: "VIP" },
-                { y: <?php echo $ticket2; ?>, label: "<?php echo $ticket2p; ?>", indexLabel: "First Class" },
-                { y: <?php echo $ticket3; ?>, label: "<?php echo $ticket3p; ?>", indexLabel: "Second Class" }                                                
-            ]
-        }]
-    };
-    $("#chartContainer").CanvasJSChart(options);
-}
 
-</script>
 
 
 </body>

@@ -1,3 +1,13 @@
+<?php include('../includes/connection.php') ?>
+<?php
+    $ref = $_POST['ref'];
+    $query = "SELECT * FROM tempEvents WHERE refNo =". $ref  ;
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_array($result);
+
+    $img = $row['image'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +21,28 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
+
+    <style>
+        .site-header {
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            position: relative;
+            text-align: center;
+            background: url(../Admin/lite/EventImages/<?php echo $img ?>) no-repeat center center/cover;
+            display: table;
+        }
+        .discription{
+            font-family: 'Rancho', cursive;
+            font-size: 30px;
+
+        }
+
+    </style>
+
+
 </head>
 <body data-spy="scroll" data-target="#site-nav">
     
@@ -60,9 +92,9 @@
     <header id="site-header" class="site-header valign-center"> 
         <div class="intro">
 
-            <h2>25 April, 2015 / Townhall California</h2>
+            <h2></h2>
             
-            <h1>Freelancer Conference 2015</h1>
+            <h1><?php echo $row['name']; ?></h1>
             
             <p>First &amp; Largest Conference</p>
             
@@ -76,9 +108,9 @@
             <div class="row">
                 <div class="col-sm-6">
 
-                    <h3 class="section-title">About Us</h3>
+                    <h3 class="section-title">About <?php echo $row['name'] ?></h3>
 
-                    <p>You've inspired new consumer, racked up click-thru's, blown-up brand enes. We can't give you back the weekends you worked, or erase the pain ebeing forced to make the logo bigger. But if you submit your best work we ajusts might be able to give the chance to show you best digital marketing.</p>
+                    <p class="discription"><?php echo $row['description']?></p>
 
                     
 
@@ -87,7 +119,8 @@
                 <div class="col-sm-6">
 
                         <figure>
-                                <img alt="" class="img-responsive" src="assets/images/about-us.jpg">
+                        <!-- assets/images/about-us.jpg" -->
+                                <img alt="" class="img-responsive" src="assets/images/backgrounds/bg-2.jpg">
                         </figure>
 
                     

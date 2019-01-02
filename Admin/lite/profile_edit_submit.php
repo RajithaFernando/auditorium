@@ -34,7 +34,7 @@ $mobile  = $_POST['mobile'];
 
 if ($password != $password2){
         $message = base64_encode(urlencode("Passwords do not match"));
-        header('Location:pages-profile.php?msg=' . $message);
+        header('Location:profile.php?msg=' . $message);
         exit();
     }
     else{
@@ -42,13 +42,13 @@ if ($password != $password2){
 
         if (mysqli_query($connection,$EditQuery) === TRUE) {
                 $message = base64_encode(urlencode("Successfully Edited!"));
-				header('Location:pages-profile.php?msg=' . $message);
+				header('Location:profile.php?msg=' . $message);
 				exit();
             } 
             
             else {
                 $message = base64_encode(urlencode("SQL Error while Registering"));
-				header('Location:pages-profile.php?msg=' . $message);
+				header('Location:profile.php?msg=' . $message);
 				exit();
             }
     }

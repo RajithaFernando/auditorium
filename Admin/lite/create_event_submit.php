@@ -10,9 +10,6 @@ include('message.php');
 
 
 ?>
-
-
-
 <?php 
 // checkSession();
                       
@@ -23,9 +20,7 @@ include('message.php');
 // }
 
 // $id = $_SESSION["id"]; 
-
-    
-        
+       
 // making RefNO Using date and time
 date_default_timezone_set('Asia/Colombo');
 
@@ -40,9 +35,6 @@ $refCode = $year.$month.$day.$hour.$min.$sec;
 settype($refCode, "integer");
 
 // echo $refCode;
-
-
-
 
 //image upload
         $target_dir = "EventImages/";
@@ -108,9 +100,6 @@ settype($refCode, "integer");
                 header('Location:create_event.php?msg=' . $message);
         }
         }
-
-
-
 $name = $_POST['name'];
 $manager_id = $_POST['manager_id'];
 $date = $_POST['date'];
@@ -125,8 +114,6 @@ $ticket2 = $_POST['ticket2'];
 $ticket3 = $_POST['ticket3'];
 $imageName = $_FILES["fileToUpload"]["name"];
     
-
-
 // echo $name;
 // echo $manager_id;
 // echo $imageName;

@@ -10,13 +10,26 @@
     
     
     <link rel="stylesheet" href="css/custome.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
     
 <!------ 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 Include the above in your HEAD tag ---------->
-        
+    <style>
+        body{
+            font-family: 'Crete Round', serif;
+
+        }
+        .btn{
+            border:0px solid transparent !important; /* this was 1px earlier */
+            margin:0px !important;
+            padding:0px !important;
+            background-color:transparent !important;
+        }
+    </style> 
 </head>
 <body>
    
@@ -45,7 +58,7 @@ Include the above in your HEAD tag ---------->
 				
 					<li>';
                       
-
+        $ref = $row['refNo'];
         $name = $row['name'];
         $date = $row['date'];
             $day   = date('d',$time);
@@ -75,7 +88,7 @@ Include the above in your HEAD tag ---------->
         $monthName = date('M', mktime(0, 0, 0, $month, 10)); // March
         // F = MARCH , M = Mar
         // print_r($monthName);
-        
+
 
                         echo '
 						<time datetime=".">
@@ -89,7 +102,7 @@ Include the above in your HEAD tag ---------->
                             <p class="desc">' .$description. '</p>
                             <ul>
 								<li style="width:44%;"><a href=" '.$web_url.' "><span class="fa fa-globe"></span>' .$web_url. '</a></li>
-                                <li style="width:25%;"><a href="event/index.html"><span class="fa fa-info-circle"></span> view more </a></li>
+                                <li style="width:25%;"><a href="event/index.php"><form method="post" action="event/index.php"> <input type="hidden" name="ref" value='.$ref.'><span class="fa fa-info-circle"><input class="btn" type="submit" value="view More"></span></a></form></li>
                                 <li style="width:25%;"><a href="event/index.html#registration"><span class="fa fa-money"></span> book seats </a></li>
                             </ul>
     

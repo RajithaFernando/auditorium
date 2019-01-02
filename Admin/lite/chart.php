@@ -9,6 +9,19 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
        }
 
     $ref= $_POST['refNo'];
+       
+        $query2 = "SELECT * FROM tempEvents WHERE refNo =". $ref  ;
+        $result2 = mysqli_query($connection, $query2);
+        $row2 = mysqli_fetch_array($result2);
+        $name = $row2['name'];
+        $price1 = $row2['ticket1'];
+        $price2 = $row2['ticket2'];
+        $price3 = $row2['ticket3'];
+
+
+
+
+
        $query = "SELECT * FROM sales WHERE eventRef = ".$ref  ;
        $result = mysqli_query($connection, $query);
        $ticket1 = 0;
@@ -59,7 +72,7 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
     var options = {
         animationEnabled: true,
         title: {
-            text: "Ticket Sales of Event A",                
+            text: 'Ticket Sales of  <?php echo $name; ?> ',                
             fontColor: "Peru"
         },	
         axisY: {
@@ -104,43 +117,54 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
 
                         <div id="chartContainer" style="height: 100%;">
                         </div>
-                    <?php echo '  
-                    </div>
-                    </div class="col-lg-6 col-sm-12">
-                        <table class="table table-striped table-dark">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Ticket Price</th>
-                                <th scope="col">Soled Tickets</th>
-                                <th scope="col">Avilable Seats</th>
-                              </tr>
-                            </thead>     
-                            <tbody>
-                              <tr>
-                                <th scope="row">VIP</th>
-                                <td>Mark</td>
-                                <td>'.$tcount1.'</td>
-                                <td>'.$vip.'</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">First Class</th>
-                                <td>Jacob</td>
-                                <td>' .$tcount2. ' </td>
-                                <td>'.$fc.'</</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Second Class</th>
-                                <td>Larry</td>
-                                <td>'.$tcount3.'</td>
-                                <td>'.$sc.'</</td>
-                              </tr>
-                            </tbody>
-                        <table>
+
+                    <?php 
+                    // echo $name;
+                        echo '  
                         </div>
-                    </div>
-                </div>';
+                            </div class="col-lg-6 col-sm-12">
+                            <table class="table table-striped table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Ticket Price</th>
+                                        <th scope="col">Soled Tickets</th>
+                                        <th scope="col">Avilable Seats</th>
+                                    </tr>
+                                </thead>     
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">VIP</th>
+                                        <td>'.$price1.'</td>
+                                        <td>'.$tcount1.'</td>
+                                        <td>'.$vip.'</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">First Class</th>
+                                        <td>'.$price2.'</td>
+                                        <td>' .$tcount2. ' </td>
+                                        <td>'.$fc.'</</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Second Class</th>
+                                        <td>'.$price3.'</td>
+                                        <td>'.$tcount3.'</td>
+                                        <td>'.$sc.'</</td>
+                                    </tr>
+                                </tbody>
+                            <table>
+                            </div>
+                        </div>
+                        </div>';
                 ?>
+
+        <div class="row">
+            <div class="text-center">
+            <a class="btn btn-primary" href="eventmanager.php" role="button">Go Back to Dashboard</a>
+
+            </div>
+        
+        </div>
 
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
