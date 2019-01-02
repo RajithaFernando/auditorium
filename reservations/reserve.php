@@ -13,26 +13,10 @@
 <div class="container">
   <h1>Auditorium details!</h1>
   <div class="row">
-    
-  
-  <div class="col-lg-8" >
-      <p>Some details</p>
-      <p>Some details</p>
-      <p>Some details</p>
-      <p>Some details</p>
-      <p>Some details</p>
-      <p>Some details</p>
-      <p>Some details</p>
-      <p>Some details</p>
-      <p>Some details</p>
-
-      <p>Some details</p>
-    </div>
-
 
     <?php include('../includes/connection.php') ?>
 <?php 
-$events = 'SELECT * FROM events ORDER BY date' ; //Selecting all data from events table 
+$events = 'SELECT * FROM tempEvents WHERE status="confirmed" ' ;//ORDER BY date' ; //Selecting all data from events table 
 $query = mysqli_query($connection, $events); //Passing SQL
 //$row = mysqli_fetch_assoc($query);
 
@@ -40,9 +24,12 @@ while ($row = mysqli_fetch_assoc($query)){
     //print_r($row['date']);
     $edats[] = $row['date'];
     $ename[] = $row['name'];
-    //print_r($edats);
+    // print_r($edats);
 }
+
+// print_r($edats);
 $l = count($edats);
+echo $l;
 //echo $edats;
 // foreach($edats as $Eventdate){
 //     $Eventdate = $row['date'];

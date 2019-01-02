@@ -1,15 +1,23 @@
-<?php include('../../includes/connection.php') ?>
-<?php include('../../includes/session.php') ?>
-<?php checkSession(); 
+<?php include('connection.php') ?>
+<?php include('session.php') ;
 
-if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
+
+include('message.php');
+?>
+ 
+
+  <?php checkSession();
+    if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
        $message = base64_encode(urlencode("Please Login"));
-       header('Location:../../login.php?msg=' . $message);
+       header('Location:login.php?msg=' . $message);
        exit();
        }
 
-?>
+                       
+     $id = $_SESSION["id"]; 
 
+    ?>
+ 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,12 +34,6 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
     <title>Event Manager | Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- chartist CSS -->
-    <link href="../assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="../assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
-    <link href="../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
-    <!--This page css - Morris CSS -->
-    <link href="../assets/plugins/c3-master/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -95,22 +97,24 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                             
                         </li>
                     </ul>
-   
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
-                    <ul class="navbar-nav my-lg-0">
+                     <ul class="navbar-nav my-lg-0">
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                        <?php checkSession();
-                       
+                      
+                         <?php
+                             
                         echo '
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="profile.png" alt="user" class="profile-pic m-r-10" /> '.$_SESSION["f_name"] .  ' '.$_SESSION["l_name"].'</a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic m-r-10" /> '.$_SESSION["f_name"] .  ' '.$_SESSION["l_name"].'</a>
                         </li>' ?>
+                         
+                         
                     </ul>
-                
+                </div>
             </nav>
         </header>
         <!-- ============================================================== -->
@@ -125,6 +129,7 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+                        
                         <li> <a class="waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li> <a class="waves-effect waves-dark" href="pages-profile.php" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">My Profile</span></a>
@@ -145,8 +150,10 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                         
                           <li> <a class="waves-effect waves-dark" href="delete.php" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Delete Event</span></a>
                         </li>
-                    </ul>
+                   
                     
+                    </ul>
+                   
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -155,9 +162,22 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
             <div class="sidebar-footer">
                 <!-- item--><a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
                 <!-- item--><a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <!-- item--><a href="../../includes/logout.php" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+                <!-- item--><a href="logout.php" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
             <!-- End Bottom points-->
         </aside>
+        
+        <?php
+                            $profile = "SELECT * FROM tempEvents WHERE  manager_id = '$id' ";
+
+                            $query = mysqli_query($connection,$profile);
+
+                            
+                    
+
+
+                   
+
+                        ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -166,91 +186,156 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
         <!-- ============================================================== -->
         <div class="page-wrapper">
             <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <div class="row page-titles">
-                    <div class="col-md-5 col-8 align-self-center">
-                        <h3 class="text-themecolor">Dashboard</h3>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
-                    </div>
+      <div class="container">
+      <div class="row">
+			<div class="[ col-lg-12 col-lg-offset-2 col-sm-8 ]">
+                <ul class="">
                     
-                    
-                 
-               <div class="col-md-7 col-4 align-self-center">
-                        <a href="create_event.php" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Create Event</a>
-                    </div>
-                <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- Row -->
-                <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-8 col-md-7">
-                        <div class="card">
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="d-flex flex-wrap">
-                                            <div>
-                                                <h3 class="card-title">Event Analysis</h3>
-                                                <h6 class="card-subtitle">First class ticket vs VIP Tickets</h6> </div>
-                                            <div class="ml-auto">
-                                                <ul class="list-inline">
-                                                    <li>
-                                                        <h6 class="text-muted text-success"><i class="fa fa-circle font-10 m-r-10 "></i>Ample</h6> </li>
-                                                    <li>
-                                                        <h6 class="text-muted  text-info"><i class="fa fa-circle font-10 m-r-10"></i>Pixel</h6> </li>
-                                                </ul>
-                                            </div>
+                    <hr>
+  
+  <?php
+    while($row = mysqli_fetch_assoc($query)){
+                    $eid = $row['id'];
+                    $name = $row['name'];
+                    $date = $row['date'];
+                        //$day   = date('d',$time);
+                        //$month = date('m',$time);
+                        //$year  = date('Y',$time);
+                    $time = $row['time'];
+                    $web_url = $row['web_url'];
+                    $fb_url = $row['fb_url'];
+                    $twitter_url = $row['twitter_url'];
+                    $google_url = $row['google_url'];
+                    $description = $row['description'];
+                    $image = $row['image'];
+                    $ticket1 = $row['ticket1'];
+                    $ticket2 = $row['ticket2'];
+                    $ticket3 = $row['ticket3'];
+
+
+
+                    //$time  = strtotime($date);
+                    $day   = date('d',$time);
+                    $month = date('m',$time);
+                    $year  = date('Y',$time);
+
+                    $monthNum = sprintf("%02s", $result["month"]);
+                    $monthName = date("F", strtotime($monthNum));
+
+        //echo 'something';
+        echo '
+        <form action="edit_event.php" method="post">
+                                <div class="form-group row">
+                                      <label for="example-text-input" class="col-2 col-form-label">Event Name</label>
+                                      <div class="col-10">
+                                        <input class="form-control" type="text" id="example-text-input" name="name" value=" '.$name.' ">
+                                      </div>
+                                    </div>
+                                
+                                
+                                    <div class="form-group row">
+                                      <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                                      <div class="col-10">
+                                        <input class="form-control" type="text" value=" '.$date.' " id="example-date-input" name="date">
+                                      </div>
+                                    </div>
+                                
+                                    <div class="form-group row">
+                                      <label for="example-time-input" class="col-2 col-form-label">Time</label>
+                                      <div class="col-10">
+                                        <input class="form-control" type="text" value=" '.$time.' " id="example-time-input" name="time">
+                                      </div>
+                                    </div>
+                                
+                                    <div class="form-group row">
+                                      <label for="example-url-input" class="col-2 col-form-label">Website</label>
+                                      <div class="col-10">
+                                        <input class="form-control" type="url" value=" '.$web_url.' " id="example-url-input" name="web_url">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <label for="example-url-input" class="col-2 col-form-label">Facebook URL</label>
+                                      <div class="col-10">
+                                        <input class="form-control" type="url" value=" '.$fb_url.' " id="example-url-input" name="fb_url">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <label for="example-url-input" class="col-2 col-form-label">Twitter URL</label>
+                                      <div class="col-10">
+                                        <input class="form-control" type="url" value=" '.$twitter_url.' " id="example-url-input" name="twitter_url">
+                                      </div>
+                                    </div>
+                                <div class="form-group row">
+                                      <label for="example-url-input" class="col-2 col-form-label">Google + URL </label>
+                                      <div class="col-10">
+                                        <input class="form-control" type="url" value=" '.$google_url.' " id="example-url-input" name="google_url">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        
+                                          <label for="comment" class="col-2 col-form-label">Event Discription</label>
+                                        <div class="col-10">
+                                          <input class="form-control" rows="5" id="example-text-input" name="description" value=" '.$description.' ">
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="amp-pxl" style="height: 360px;"></div>
+                                <div class="form-group row">
+                                      <label for="example-text-input" class="col-3 col-form-label">Ticket price (VIP)</label>
+                                      <div class="col-6">
+                                        <input class="form-control" type="text" id="example-text-input" name="ticket1" value=" '.$ticket1.' ">
+                                      </div>
+                                         <div class="col3"></div>
+
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-5">
-                        <div class="card">
-                            <div class="card-block">
-                                <h3 class="card-title">Ticket salse</h3>
-                                <h6 class="card-subtitle">Different prices of tickets</h6>
-                                <div id="visitor" style="height:290px; width:100%;"></div>
-                            </div>
-                            <div>
-                                <hr class="m-t-0 m-b-0">
-                            </div>
-                            <div class="card-block text-center ">
-                                <ul class="list-inline m-b-0">
-                                    <li>
-                                        <h6 class="text-muted text-info"><i class="fa fa-circle font-10 m-r-10 "></i>2000</h6> </li>
-                                    <li>
-                                        <h6 class="text-muted  text-primary"><i class="fa fa-circle font-10 m-r-10"></i>1500</h6> </li>
-                                    <li>
-                                        <h6 class="text-muted  text-success"><i class="fa fa-circle font-10 m-r-10"></i>2000</h6> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Row -->
-                <!-- Row -->
-           
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-            </div>
+                                
+                                    <div class="form-group row">
+                                      <label for="example-text-input" class="col-3 col-form-label">Ticket price First class</label>
+                                      <div class="col-6">
+                                        <input class="form-control" type="text" id="example-text-input" name="ticket2" value=" '.$ticket2.' ">
+                                      </div>
+                                        <div class="col3"></div>
+
+                                    </div>
+                                
+                                     <div class="form-group row">
+                                      <label for="example-text-input" class="col-3 col-form-label">Ticket price Second class</label>
+                                      <div class="col-6">
+                                        <input class="form-control" type="text" id="example-text-input" name="ticket3" value=" '.$ticket3.' ">
+                                      </div>
+                                         <div class="col3"></div>
+                                    </div>
+            
+                                    
+                                        <div class=" col-3col align-self-center">
+                                            <div class="form-group">
+                                            <input type="hidden" value="
+                                            '. $eid.'" name="eid">
+                                             
+                                        <div class="col-sm-12">
+                                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Edit Event"  name="create_event">
+                                            <p><?php echo $id ;?></p>
+                                            
+                                            
+                                        </div>
+                                        </div>
+                                            
+                                           
+                                            
+                                            
+                                            
+                                        
+                                       </form><hr><hr><hr>' ;
+        
+        
+        
+        }
+                    ?>
+                  
+
+					
+				</ul>
+			</div>
+		</div>
+	</div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -286,17 +371,6 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugins -->
-    <!-- ============================================================== -->
-    <!-- chartist chart -->
-    <script src="../assets/plugins/chartist-js/dist/chartist.min.js"></script>
-    <script src="../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
-    <!--c3 JavaScript -->
-    <script src="../assets/plugins/d3/d3.min.js"></script>
-    <script src="../assets/plugins/c3-master/c3.min.js"></script>
-    <!-- Chart JS -->
-    <script src="js/dashboard1.js"></script>
 </body>
 
 </html>

@@ -23,7 +23,7 @@ Include the above in your HEAD tag ---------->
     <?php include('includes/hedder.php') ?>
     <?php
     
-    $events = 'SELECT * FROM events ORDER BY date DESC' ; //Selecting all data from events table 
+    $events = 'SELECT * FROM tempEvents WHERE status ="confirmed" ORDER BY date DESC' ; //Selecting all data from events table 
     $query = mysqli_query($connection, $events); //Passing SQL
     
    
@@ -57,7 +57,7 @@ Include the above in your HEAD tag ---------->
         $twitter_url = $row['twitter_url'];
         $google_url = $row['google_url'];
         $description = $row['description'];
-        $image = $row['image'];
+        $imageName = $row['image'];
         $price = $row['price'];
 
 
@@ -66,6 +66,7 @@ Include the above in your HEAD tag ---------->
         $day   = date('d',$time);
         $month = date('m',$time);
         $year  = date('Y',$time);
+
 
         //$monthNum = sprintf("%02s", $result["month"]);
         //$monthName = date("F", strtotime($monthNum));
@@ -82,7 +83,7 @@ Include the above in your HEAD tag ---------->
 							<span class="month">' .$monthName.'-'.$year.'</span>
 							
 						</time>
-						<img alt=" '.$name.' " src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
+						<img alt=" '.$name.' " src="Admin/lite/EventImages/'.$imageName.' " />
 						<div class="info">
 							<h2 class="title">' .$name. '</h2>
                             <p class="desc">' .$description. '</p>

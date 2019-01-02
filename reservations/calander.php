@@ -1,6 +1,6 @@
 <?php include('../includes/connection.php') ?>
 <?php 
-$events = 'SELECT * FROM events ORDER BY date' ; //Selecting all data from events table 
+$events = 'SELECT * FROM tempEvents ORDER BY date' ; //Selecting all data from events table 
 $query = mysqli_query($connection, $events); //Passing SQL
 //$row = mysqli_fetch_assoc($query);
 

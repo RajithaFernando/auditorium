@@ -33,8 +33,14 @@ if(isset($_POST['login-submit'])){
         
             $usertype= $userRow['usertype'];
             //echo "sss";
-            //if($usertype == 'e' ){
-            header("Location:Admin/lite/index.php" );
+            if($usertype == 'e' ){
+            header("Location:Admin/lite/eventmanager.php" );
+            }
+
+            elseif($usertype=='m'){
+                header("Location:adminfunctions/admin.php");
+
+            }
             //}
             
             
