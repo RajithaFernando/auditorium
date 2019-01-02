@@ -9,9 +9,51 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
        }
        $mid = $_SESSION['id'];
     //    echo $mid;
-       $query1 = "SELECT  refNo , name  FROM tempEvents WHERE manager_id = $mid  AND status='confirmed' order by date";
-       $result1 = mysqli_query($connection, $query1);
- 
+     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
+    //    $connect = mysqli_connect("localhost", "root", "", "testing");
+    //    $query1 = "SELECT refNo FROM tempEvents WHERE manager_id = $mid  AND status	='confirmed' order by date";
+    //    $result1 = mysqli_query($connection, $query1);
+    //    $row1 = mysqli_fetch_array($result1);
+      
+      
+    //   while ($row1){
+
+    //   }
+       $query = "SELECT * FROM sales WHERE eventRef = '181231134745'  ";
+       $result = mysqli_query($connection, $query);
+       $ticket1 = 0;
+       $ticket2 = 0;
+       $ticket3 = 0;
+       //
+       $tcount1 = 0;
+       $tcount2 = 0;
+       $tcount3 = 0;   
+
+       
+       while($row = mysqli_fetch_array($result))
+       {
+            if ($row["Catagory"] == 1){
+                $ticket1=$ticket1+  $row["ticketValue"];
+                $tcount1=$tcount1 + 1;               
+            }
+            elseif($row["Catagory"] == 2){
+                $ticket2=$ticket2+  $row["ticketValue"];
+                $tcount2=$tcount2 + 1;
+            }
+            elseif($row["Catagory"] == 3){
+                $ticket3=$ticket3+  $row["ticketValue"];
+                $tcount3=$tcount3 + 1;
+            }
+            $totalTicket = $ticket1 + $ticket2 + $ticket3;
+        }
+
+        // round_to_2dp
+        // round(520.34345,2)
+        //$ticket1p1= (($ticket1/$totalTicket)*100) ;
+        $ticket1p = round((($ticket1/$totalTicket)*100),1) ;
+        $ticket2p = round((($ticket2/$totalTicket)*100),1) ;
+        $ticket3p = round((($ticket3/$totalTicket)*100),1) ;
+
        ?>
 
 
@@ -31,26 +73,20 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- chartist CSS -->
-
-
-
     <link href="../assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
     <link href="../assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
     <link href="../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
-
     <!--This page css - Morris CSS -->
     <!-- Custom CSS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-
     <link href="css/style.css" rel="stylesheet">
-    
-    
     <!-- You can change the theme colors from here -->
     <link href="css/colors/blue.css" id="theme" rel="stylesheet">
-    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 
 <!-- chart Styles -->
@@ -68,6 +104,49 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
     display:none;
 }
 </style>
+
+<script>
+   window.onload = function () {
+    //Better to construct options first and then pass it as a parameter
+    var options = {
+        animationEnabled: true,
+        title: {
+            text: "Ticket Sales of Event A",                
+            fontColor: "Peru"
+        },	
+        axisY: {
+            tickThickness: 0,
+            lineThickness: 0,
+            valueFormatString: " ",
+            gridThickness: 0                    
+        },
+        axisX: {
+            tickThickness: 0,
+            lineThickness: 0,
+            labelFontSize: 18,
+            labelFontColor: "Peru"				
+        },
+        data: [{
+            indexLabelFontSize: 12,
+            toolTipContent: "<span style=\"color:#62C9C3\">{indexLabel}:</span> <span style=\"color:#CD853F\"><strong>{y}</strong></span>",
+            indexLabelPlacement: "inside",
+            indexLabelFontColor: "white",
+            indexLabelFontWeight: 600,
+            indexLabelFontFamily: "Verdana",
+            color: "#62C9C3",
+            type: "bar",
+            dataPoints: [
+                { y: <?php echo $ticket1; ?>, label: "<?php echo $ticket1p; ?>", indexLabel: "VIP" },
+                { y: <?php echo $ticket2; ?>, label: "<?php echo $ticket2p; ?>", indexLabel: "First Class" },
+                { y: <?php echo $ticket3; ?>, label: "<?php echo $ticket3p; ?>", indexLabel: "Second Class" }                                                
+            ]
+        }]
+    };
+    $("#chartContainer").CanvasJSChart(options);
+}
+</script>
+
+
 
 
 </head>
@@ -195,36 +274,17 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <div class="row page-titles">
-                    <div class="col-md-4 col-4 align-self-center">
+                    <div class="col-md-5 col-8 align-self-center">
                         <h3 class="text-themecolor">Dashboard</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <!-- col-md-4 col-4 align-self-center -->
-                    <div class="dropdown col-md-4 col-4 align-self-center">
-                    
-                        <form action="chart.php" method="post">
-                        <label for="custID" class="col-sm-2 col-form-label">Select Event</label>
-                        <select class="form-control" id="sel2" name="refNo">
-                            <?php 
-                            // 
-                                 while ($row1 = mysqli_fetch_assoc($result1))   {
-                                    echo '<option value ='.$row1['refNo'].' id="custId">'.$row1['name'].'</option>';
-                                } 
-                            ?>           
-                        </select>
-                            <!-- <input type="" id="custId" name="refNo" value="181231134745"> -->
-                           <a href="charts.php"> <button type="submit" class="btn btn-primary">Get Event Reports</button></a>
-                        </form>
-                            
-                            </div>
-                        </div>
                     
                     
                  
-               <div class="col-md-4 col-4 align-self-center">
+               <div class="col-md-7 col-4 align-self-center">
                         <a href="create_event.php" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Create Event</a>
                     </div>
                 <!-- ============================================================== -->
@@ -237,9 +297,60 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
                 
                 
                 <!-- Row  eka patan gannawa-->
-    
-                <!-- <iframe src="chart.php" height="200" width="300"></iframe> -->
-                                
+                
+                
+                <?php
+                for ($i=0;$i<3; $i++){
+
+               
+                
+                echo '
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-12 col-sm-12" style= "height:300px;">
+
+                        <div id="chartContainer" style="height: 100%;">
+                        </div>
+                      
+                    </div>
+                    </div class="col-lg-6 col-sm-12">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ticket Price</th>
+                                <th scope="col">Soled Tickets</th>
+                                <th scope="col">Avilable Seats</th>
+                              </tr>
+                            </thead>     
+                            <tbody>
+                              <tr>
+                                <th scope="row">VIP</th>
+                                <td>Mark</td>
+                                <td>'.$tcount1.'</td>
+                                <td>'.$vip.'</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">First Class</th>
+                                <td>Jacob</td>
+                                <td>' .$tcount2. ' </td>
+                                <td>'.$fc.'</</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Second Class</th>
+                                <td>Larry</td>
+                                <td>'.$tcount3.'</td>
+                                <td>'.$sc.'</</td>
+                              </tr>
+                            </tbody>
+                        <table>
+                        </div>
+                    </div>
+                </div>  '
+                ;
+
+                }
+                ?>               
                 <!-- Row  eka ewara wenawa-->
            
                 <!-- ============================================================== -->
@@ -267,26 +378,18 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <!-- 
-        <script src="../assets/plugins/jquery/jquery.min.js"></script> 
-        -->
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <!-- 
-        
-        <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
-        <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
-    -->
+    <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <!-- 
-        <script src="js/jquery.slimscroll.js"></script> 
-        -->
+    <script src="js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
-    <!-- <script src="js/waves.js"></script> -->
+    <script src="js/waves.js"></script>
     <!--Menu sidebar -->
     <script src="js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <!-- 
-        <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script> -->
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
     <!-- ============================================================== -->
@@ -294,56 +397,12 @@ if(!isset($_SESSION['usertype']) || $_SESSION['usertype'] != 'e'){
     <!-- ============================================================== -->
     
     <!--c3 JavaScript -->
-    <!-- 
-        <script src="../assets/plugins/d3/d3.min.js"></script>
-    <script src="../assets/plugins/c3-master/c3.min.js"></script> 
-    -->
+    <script src="../assets/plugins/d3/d3.min.js"></script>
+    <script src="../assets/plugins/c3-master/c3.min.js"></script>
 
     
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-
-<script>
-   window.onload = function () {
-    //Better to construct options first and then pass it as a parameter
-    var options = {
-        animationEnabled: true,
-        title: {
-            text: "Ticket Sales of Event A",                
-            fontColor: "Peru"
-        },	
-        axisY: {
-            tickThickness: 0,
-            lineThickness: 0,
-            valueFormatString: " ",
-            gridThickness: 0                    
-        },
-        axisX: {
-            tickThickness: 0,
-            lineThickness: 0,
-            labelFontSize: 18,
-            labelFontColor: "Peru"				
-        },
-        data: [{
-            indexLabelFontSize: 12,
-            toolTipContent: "<span style=\"color:#62C9C3\">{indexLabel}:</span> <span style=\"color:#CD853F\"><strong>{y}</strong></span>",
-            indexLabelPlacement: "inside",
-            indexLabelFontColor: "white",
-            indexLabelFontWeight: 600,
-            indexLabelFontFamily: "Verdana",
-            color: "#62C9C3",
-            type: "bar",
-            dataPoints: [
-                { y: <?php echo $ticket1; ?>, label: "<?php echo $ticket1p; ?>", indexLabel: "VIP" },
-                { y: <?php echo $ticket2; ?>, label: "<?php echo $ticket2p; ?>", indexLabel: "First Class" },
-                { y: <?php echo $ticket3; ?>, label: "<?php echo $ticket3p; ?>", indexLabel: "Second Class" }                                                
-            ]
-        }]
-    };
-    $("#chartContainer").CanvasJSChart(options);
-}
-
-</script>
 
 
 </body>
